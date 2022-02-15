@@ -33,15 +33,15 @@ void fileprocessor::processFile(string input_file, string output_file){
   string line;
   string line1;
   in_file.open(input_file);
+  int y = 0;
   while(getline(in_file,line)){
-    line1 = line1 + line + "\n";
+    line1 = line1 + finisher.translateEnglishSentence(line) + "\n";
+    y++;
   }
-  string full_tutnese;
-  full_tutnese = finisher.translateEnglishSentence(line1);
   in_file.close();
 
   ofstream out_file;
   out_file.open(output_file);
-  out_file << full_tutnese << endl;
+  out_file << line1 << endl;
   out_file.close();
 }

@@ -27,13 +27,19 @@ string translator::translateEnglishWord(string a){
   model ab;
   for(char i: a){
     if(i==temp){
-      ret.pop_back();
-      ret = ret + ab.translateDoubleCharacter(i);
+      string sing = ab.translateSingleCharacter(i);
+      int sing_value = sing.length();
+      ret.erase(counter-sing_value,sing_value);
+      string doub = ab.translateDoubleCharacter(i);
+      ret = ret + doub;
+      counter = counter - sing_value;
+      counter = counter + doub.length();
     }
     else{
-      ret = ret + ab.translateSingleCharacter(i);
+      string word = ab.translateSingleCharacter(i);
+      ret = ret + word;
+      counter = counter + word.length();
     }
-    counter = counter + 1;
     temp = i;
   }
   return ret;
@@ -46,23 +52,21 @@ into Tutnese. It then returns the string.
 */
 
 string translator::translateEnglishSentence(string b){
-    string ret = "";
-    model ac;
-    char temp;
-    int counter = 0;
-    for(char w: b){
-      if(w==temp){
-        string len = ac.translateSingleCharacter(w);
-        for(int y=0; y<len.length(); ++y){
-          ret.pop_back();
-        }
-        ret = ret + ac.translateDoubleCharacter(w);
-      }
-      else{
-        ret = ret + ac.translateSingleCharacter(w);
-      }
-      counter = counter + 1;
-      temp = w;
+  string ret = "";
+  string word;
+  int count = 0;
+  for(char space: b){
+    if(space==' '){
+      ret = ret + translateEnglishWord(word) + " ";
+      count = count + 1;
+      word = "";
+      continue;
     }
-    return ret;
+    word = word + space;
+    count = count + 1;
+    if(count==b.length()){
+      ret = ret + translateEnglishWord(word);
+    }
+  }
+  return ret;
 }
