@@ -47,8 +47,10 @@ string translator::translateEnglishWord(string a){
 
 /*translateEnglishSentence is a method in the translator class.
 Simple to the translateEnglishWord method, but instead takes longer input string.
-Creates an instance of the class model, as uses its methods to translate the word
-into Tutnese. It then returns the string.
+It will check for spaces, and add characters into a string to make a word.
+That word will then be used with the method translateEnglishWord() from above.
+With all the words in the sentence being stored in the "ret" string,
+it will be a fully tutnese translated string sentence that will be returned.
 */
 
 string translator::translateEnglishSentence(string b){
