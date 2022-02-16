@@ -134,10 +134,11 @@ string model::translateDoubleCharacter(char b){
     }
     else{
       if(case_b==true){
-        return "Squa";
+        ret = "Squa" + translateSingleCharacter(b);
+        return ret;
       }
       else{
-        return "squa";
+        ret = "squa" + translateSingleCharacter(b);
       }
     }
     return ret;
